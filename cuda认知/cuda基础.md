@@ -24,3 +24,12 @@
     3.调用kernel函数操作数据
     4.数据操作完成后，将数据成gpu空间拷贝到cpu空间
     5.清理cuda程序占用的gpu空间
+
+cuda程序将系统分为host和device两部分，二者均有各自的memory，kernel可以操作device memory，为了更好地操作device memory cuda提供了以下几个内存操作函数
+
+    1.cudaError_t   cudamalloc（void** devptr,size_t size）//devptr表示分配的数据类型指针，size表示分配的大小
+    2.cudaError_t   cudamemcpy(void* dst, const void* src, size_t count,cudaMemcpyKind kind)//src拷贝给dst count表示拷贝数据大小，kind表示拷贝类型，通常为两种「cudaMemcpyHostToDevice,cudaMemcpyDeviceToHost」
+    3.cudaMemest()//cuda批量初始化函数
+    4.cudaFree()//释放cuda占用的gpu内存空间
+    
+这里cudaError_t 指返回类型，操作成功返回cudaSuccess，失败返回cudaErrorMemoryAllocation
